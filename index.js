@@ -8,7 +8,7 @@
 // guessing whole word ends game
 // if letter is equal to 
 
-let word = "spaceman"
+let word = "space-man"
 let lives = 10
 let playerPick//= document.getElementById("playerPick").value;
 let correctLetters = []
@@ -16,39 +16,63 @@ let incorrectLetter =[]
 
 const buttonEl = document.querySelector('button');
 const split = word.split('')
-buttonEl.addEventListener('click', checkLetter())
+let wordHolder = document.getElementById('omega')
+let correctGuess = document.createElement('ul')
+let pGuess = document.createElement('li')
+buttonEl.addEventListener('click', checkLetter)
 
+init()
 function init() {
-
+ board()
 }
-
+// get words and number of lives to show to be @ MVP
 function checkLetter(){
     playerPick = document.getElementById("playerPick").value;
-    let wordHolder = document.getElementById('omega')
-    let correctGuess = document.createElement('ul')
     console.log(playerPick)
-if (word.includes(playerPick)){
-    if (!checkGuess(playerPick)){
-        correctGuess.setAttribute('id', 'my-word')
-        let pGuess = document.createElement('li')
-        pGuess.setAttribute('class', 'guess')
-        for (let i = 0; i < split.length; i++){
-            if (playerPick === split[i]){
-                console.log(`the letter ${playerPick} is in space number: ${i+1}`)
-                correctLetters.push(playerPick)
-                //change background of letter so it is visible
-            }
+    if (word.includes(playerPick)){
+        console.log('includes-letter')
+        if (!checkGuess(playerPick)){
+            let listItems = document.querySelectorAll('.list-item')
+            //console.log(listItems)
+            listItems.forEach(function(item){
+                //console.log(item.getAttribute('value'))
+                if (item.getAttribute('value') === playerPick.toLowerCase()){
+                    console.log('Item Value')
+                    item.innerHTML = playerPick
+                }
+            })
+            console.log(pGuess)
+        
+    }
+    }else {
+        if (!wrongGuessCheck(playerPick)){
+            checkLivesNum(playerPick)
         }
     }
-}else if (!wrongGuessCheck(playerPick)){
-    checkLivesNum(playerPick)
-    }
     console.log(correctLetters)
-    loops()
-}
+    //loops()
+    }
 
+
+function board() {
+    
+for (let i = 0; i < split.length; i++){
+    let spaceDiv = document.createElement('li')
+    spaceDiv.setAttribute('class', 'list-item')
+    spaceDiv.setAttribute('value', split[i])
+    //console.log(spaceDiv.getAttribute('value'))
+    if (split[i] === "-") {
+        spaceDiv.innerHTML = "-";
+    } else {
+        spaceDiv.innerHTML = "_";
+        }
+        correctGuess.appendChild(spaceDiv);
+        wordHolder.appendChild(correctGuess);
+        
+}
+}
 function loops() {
-    console.log(correctLetters.length, split.length)
+    //console.log(correctLetters.length, split.length)
     //if (lives !== 0  || correctLetters.length !== split.length) {
     if (correctLetters.length === split.length) {
         return winner()
@@ -56,18 +80,18 @@ function loops() {
     }else if (lives === 0){
         return loser()
     }else{
-        console.log('still running...')
+       //console.log('still running...')
     }
 }
 
 // 
 function checkLivesNum (wrong) {
-    console.log(incorrectLetter)
+    //console.log(incorrectLetter)
     incorrectLetter.push(wrong)
     lives--
     //let text = incorrectLetter.toString()
     document.getElementById("demo").innerHTML = incorrectLetter.toString();
-    console.log(lives)
+    //console.log(lives)
 }
 
 // make a function checking if an input letter is already in the correctLetters array
@@ -91,6 +115,7 @@ function winner() {
     if (correctLetters.length === split.length){
         // output a message saying congratulations, you won
         console.log('Congratulations, you won!')
+        document.getElementById("end-text").innerHTML = "Congratulations, you won!"
     }
 }
 
@@ -99,6 +124,7 @@ function loser() {
     if (lives === 0) {
         // outputs message saying player lost
         console.log('you lost hehe')
+        document.getElementById("end-text").innerHTML = "Uh-oh, Looks Like You Lost :("
     }
 }
 
