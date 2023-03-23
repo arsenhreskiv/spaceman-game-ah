@@ -8,7 +8,7 @@
 // guessing whole word ends game
 // if letter is equal to 
 
-let word = "space-man"
+let word = "spaceman"
 let lives = 10
 let playerPick//= document.getElementById("playerPick").value;
 let correctLetters = []
@@ -27,35 +27,46 @@ function init() {
 }
 // get words and number of lives to show to be @ MVP
 function checkLetter(){
+    document.getElementById("lives").innerHTML = `Lives Remaining: ${lives}`
     playerPick = document.getElementById("playerPick").value;
-    console.log(playerPick)
+    //console.log(playerPick)
     if (word.includes(playerPick)){
-        console.log('includes-letter')
+        //console.log('includes-letter')
         if (!checkGuess(playerPick)){
             let listItems = document.querySelectorAll('.list-item')
             //console.log(listItems)
+            console.log(correctLetters)
             listItems.forEach(function(item){
                 //console.log(item.getAttribute('value'))
                 if (item.getAttribute('value') === playerPick.toLowerCase()){
-                    console.log('Item Value')
+                    //console.log('Item Value')
                     item.innerHTML = playerPick
+                    correctLetters.push(playerPick)
+                    //winner()
                 }
             })
-            console.log(pGuess)
-        
-    }
+            // for (let i = 0; i < split.length; i++){
+            //     if (playerPick === split[i]){
+            //         console.log(`the letter ${playerPick} is in space number: ${i+1}`)
+            //         correctLetters.push(playerPick)
+            //         //change background of letter so it is visible
+            //     }
+            // }
+            //console.log(correctLetters)
+        }
     }else {
         if (!wrongGuessCheck(playerPick)){
             checkLivesNum(playerPick)
+            //loser()
         }
     }
-    console.log(correctLetters)
-    //loops()
+    //console.log(correctLetters)
+    loops()
     }
 
 
 function board() {
-    
+    document.getElementById("lives").innerHTML = `Lives Remaining: ${lives}`;
 for (let i = 0; i < split.length; i++){
     let spaceDiv = document.createElement('li')
     spaceDiv.setAttribute('class', 'list-item')
