@@ -24,9 +24,14 @@ function init() {
 
 function checkLetter(){
     playerPick = document.getElementById("playerPick").value;
+    let wordHolder = document.getElementById('omega')
+    let correctGuess = document.createElement('ul')
     console.log(playerPick)
 if (word.includes(playerPick)){
-    if (!checkGuess(playerPick) /*=== false*/){
+    if (!checkGuess(playerPick)){
+        correctGuess.setAttribute('id', 'my-word')
+        let pGuess = document.createElement('li')
+        pGuess.setAttribute('class', 'guess')
         for (let i = 0; i < split.length; i++){
             if (playerPick === split[i]){
                 console.log(`the letter ${playerPick} is in space number: ${i+1}`)
@@ -35,7 +40,7 @@ if (word.includes(playerPick)){
             }
         }
     }
-}else {
+}else if (!wrongGuessCheck(playerPick)){
     checkLivesNum(playerPick)
     }
     console.log(correctLetters)
@@ -46,10 +51,10 @@ function loops() {
     console.log(correctLetters.length, split.length)
     //if (lives !== 0  || correctLetters.length !== split.length) {
     if (correctLetters.length === split.length) {
-        console.log('Done.')
+        return winner()
         
     }else if (lives === 0){
-        console.log('Done v2')
+        return loser()
     }else{
         console.log('still running...')
     }
@@ -65,7 +70,6 @@ function checkLivesNum (wrong) {
     console.log(lives)
 }
 
-// if correct letters are equal to word (don't think this is right)
 // make a function checking if an input letter is already in the correctLetters array
 // if it is, don't do anything, if it isn't add it
 function checkGuess(playerPick) {
@@ -79,14 +83,26 @@ function checkGuess(playerPick) {
 //function to check if the wrong answer has been selected before
 function wrongGuessCheck(playerPick) {
     if (incorrectLetter.includes(playerPick)) {
-
-    }
+        return true
+    } return false
 }
 // function winner for if player guesses the correct word, then say congratulations and end game
 function winner() {
     if (correctLetters.length === split.length){
-        
+        // output a message saying congratulations, you won
+        console.log('Congratulations, you won!')
     }
 }
 
 // make a loser function for when the player loses all of their lives you output YOU LOST and end game.
+function loser() {
+    if (lives === 0) {
+        // outputs message saying player lost
+        console.log('you lost hehe')
+    }
+}
+
+// function to reset game
+// function restart(true) {
+//     if (true) init()
+// }
