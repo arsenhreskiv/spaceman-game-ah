@@ -14,6 +14,10 @@ Spaceman is a word-guessing game where you have a set number of lives, in the ca
 <img src="https://i.imgur.com/8e0QLkE.png">
 
 # Getting Started
+<div align="center">
+   <h1> SPACEMAN </h1>
+   <h3><a href=https://arsenhreskiv.github.io/spaceman-game-ah> Play Spaceman <h3>                             
+</div>
 <details open>
 <ol>
 <li>Type in a letter answer</li>
