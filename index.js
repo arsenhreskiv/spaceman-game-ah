@@ -10,7 +10,7 @@
 
 let word = "spaceman"
 let lives = 10
-let playerPick//= document.getElementById("playerPick").value;
+let playerPick
 let correctLetters = []
 let incorrectLetter =[]
 
@@ -45,14 +45,7 @@ function checkLetter(){
                     //winner()
                 }
             })
-            // for (let i = 0; i < split.length; i++){
-            //     if (playerPick === split[i]){
-            //         console.log(`the letter ${playerPick} is in space number: ${i+1}`)
-            //         correctLetters.push(playerPick)
-            //         //change background of letter so it is visible
-            //     }
-            // }
-            //console.log(correctLetters)
+            
         }
     }else {
         if (!wrongGuessCheck(playerPick)){
@@ -83,30 +76,23 @@ for (let i = 0; i < split.length; i++){
 }
 }
 function loops() {
-    //console.log(correctLetters.length, split.length)
-    //if (lives !== 0  || correctLetters.length !== split.length) {
     if (correctLetters.length === split.length) {
         return winner()
         
     }else if (lives === 0){
         return loser()
     }else{
-       //console.log('still running...')
     }
 }
 
-// 
+ 
 function checkLivesNum (wrong) {
-    //console.log(incorrectLetter)
     incorrectLetter.push(wrong)
     lives--
-    //let text = incorrectLetter.toString()
     document.getElementById("demo").innerHTML = incorrectLetter.toString();
-    //console.log(lives)
 }
 
 // make a function checking if an input letter is already in the correctLetters array
-// if it is, don't do anything, if it isn't add it
 function checkGuess(playerPick) {
     if (correctLetters.includes(playerPick)){
         return true
@@ -133,7 +119,6 @@ function winner() {
 // make a loser function for when the player loses all of their lives you output YOU LOST and end game.
 function loser() {
     if (lives === 0) {
-        // outputs message saying player lost
         console.log('you lost hehe')
         document.getElementById("end-text").innerHTML = "Uh-oh, Looks Like You Lost :("
     }
