@@ -8,9 +8,9 @@
 // guessing whole word ends game
 // if letter is equal to 
 
-let word = "space-man"
+let word = "spaceman"
 let lives = 10
-let playerPick//= document.getElementById("playerPick").value;
+let playerPick
 let correctLetters = []
 let incorrectLetter =[]
 
@@ -27,35 +27,39 @@ function init() {
 }
 // get words and number of lives to show to be @ MVP
 function checkLetter(){
+    document.getElementById("lives").innerHTML = `Lives Remaining: ${lives}`
     playerPick = document.getElementById("playerPick").value;
-    console.log(playerPick)
+    //console.log(playerPick)
     if (word.includes(playerPick)){
-        console.log('includes-letter')
+        //console.log('includes-letter')
         if (!checkGuess(playerPick)){
             let listItems = document.querySelectorAll('.list-item')
             //console.log(listItems)
+            console.log(correctLetters)
             listItems.forEach(function(item){
                 //console.log(item.getAttribute('value'))
                 if (item.getAttribute('value') === playerPick.toLowerCase()){
-                    console.log('Item Value')
+                    //console.log('Item Value')
                     item.innerHTML = playerPick
+                    correctLetters.push(playerPick)
+                    //winner()
                 }
             })
-            console.log(pGuess)
-        
-    }
+            
+        }
     }else {
         if (!wrongGuessCheck(playerPick)){
             checkLivesNum(playerPick)
+            //loser()
         }
     }
-    console.log(correctLetters)
-    //loops()
+    //console.log(correctLetters)
+    loops()
     }
 
 
 function board() {
-    
+    document.getElementById("lives").innerHTML = `Lives Remaining: ${lives}`;
 for (let i = 0; i < split.length; i++){
     let spaceDiv = document.createElement('li')
     spaceDiv.setAttribute('class', 'list-item')
@@ -72,30 +76,23 @@ for (let i = 0; i < split.length; i++){
 }
 }
 function loops() {
-    //console.log(correctLetters.length, split.length)
-    //if (lives !== 0  || correctLetters.length !== split.length) {
     if (correctLetters.length === split.length) {
         return winner()
         
     }else if (lives === 0){
         return loser()
     }else{
-       //console.log('still running...')
     }
 }
 
-// 
+ 
 function checkLivesNum (wrong) {
-    //console.log(incorrectLetter)
     incorrectLetter.push(wrong)
     lives--
-    //let text = incorrectLetter.toString()
     document.getElementById("demo").innerHTML = incorrectLetter.toString();
-    //console.log(lives)
 }
 
 // make a function checking if an input letter is already in the correctLetters array
-// if it is, don't do anything, if it isn't add it
 function checkGuess(playerPick) {
     if (correctLetters.includes(playerPick)){
         return true
@@ -122,7 +119,6 @@ function winner() {
 // make a loser function for when the player loses all of their lives you output YOU LOST and end game.
 function loser() {
     if (lives === 0) {
-        // outputs message saying player lost
         console.log('you lost hehe')
         document.getElementById("end-text").innerHTML = "Uh-oh, Looks Like You Lost :("
     }
